@@ -1,9 +1,12 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState} from 'react';
+import {v4 as uuid} from "uuid";
+//import uuid from 'uuid/dist/v4';
 
-const FormComponent = () => {
+const FormComponent = (props) => {
 
     const [appointment, setAppointmentState] = useState(
         {
+           id:'',
            client:'',
            adviser:'',
            date:'',
@@ -18,6 +21,9 @@ const FormComponent = () => {
     const onChangeForm = event => {
         setAppointmentState({
             ...appointment,
+            // adding an ID - uuid library
+            id: uuid(),
+            // adding the form info to the state
             [event.target.name]: event.target.value
         });
     } 
@@ -30,11 +36,28 @@ const FormComponent = () => {
         if (appointment.client.trim() ==='' ||          appointment.adviser.trim() ==='' ||
         appointment.date.trim() ==='' ||
         appointment.hour.trim() ==='' ||
-        appointment.details.trim() ==='' )
-        //console.log("one or more filds are empty");
+        appointment.details.trim() ==='' ){
+        
             setErrorState(true);
             return;
-/*
+        }
+        setErrorState(false);
+
+        // Creating new Appointment
+        props.newAppointment(appointment);
+
+
+     // Reset formular at the end of the button
+        setAppointmentState({ 
+            id:'',
+            client:'',
+            adviser:'',
+            date:'',
+            hour:'',
+            details:''
+        });
+ /*   
+  //viejo antes hacia asi, ahora se hace con el form directamente llega la informacion.
         const newAppointnment = {
             client: state.userSelected,
             adviser: state.title,
