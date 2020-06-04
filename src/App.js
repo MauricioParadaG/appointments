@@ -1,6 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import FormComponent from './components/form/Form.component';
 import AppointmentComponent from './components/Appointment.component';
+import PropTypes from 'prop-types';
 
 function App() {
 
@@ -12,13 +13,13 @@ function App() {
 
   const [appointments, setAppointmentsState] = useState(initialAppointments);
 
-  useEffect(() => {
-    if(!initialAppointments){
+  useEffect( () => {
+    if(initialAppointments){
       localStorage.setItem('appointments', JSON.stringify(appointments));
     } else {
       localStorage.setItem('appointments', JSON.stringify([]));
     }
-  }, [appointments] );
+  }, [appointments, initialAppointments] );
 
   const newAppointment = appointment =>{
     setAppointmentsState([
@@ -65,5 +66,10 @@ function App() {
     </Fragment>
   );
 }
+
+FormComponent.propTypes= {
+  newAppointment: PropTypes.func.isRequired 
+}
+
 
 export default App;
