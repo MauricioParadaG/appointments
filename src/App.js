@@ -1,15 +1,21 @@
 import React, {Fragment, useState} from 'react';
 import FormComponent from './components/form/Form.component';
+import AppointmentComponent from './components/Appointment.component';
 
 function App() {
 
   const [appointments, setAppointmentsState] = useState([]);
 
-  const newAppointment = appointnment =>{
+  const newAppointment = appointment =>{
     setAppointmentsState([
-      ... appointments,
-      appointnment
+      ...appointments,
+      appointment
     ]);
+  }
+
+  const deleteAppointment = id =>{
+    const afterDeleteAppointments = appointments.filter(appointment => appointment.id !== id);
+    setAppointmentsState(afterDeleteAppointments)
   }
 
   return (
@@ -23,9 +29,16 @@ function App() {
             newAppointment={newAppointment}
           />
         </div>
-
+      {/** Second Column */}
         <div className="one-half column">
-          2
+         <h2>List of Appointments</h2>
+         {appointments.map(appointment =>(  
+            <AppointmentComponent  
+              key={appointment.id}
+              appointmentsState={appointment}
+              deleteAppointment={deleteAppointment}
+            />
+          ))}
         </div>
       </div>
     </div>

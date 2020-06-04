@@ -28,7 +28,7 @@ const FormComponent = (props) => {
         });
     } 
 
-    //const {client, advisor, date, hour, details} = appointment;
+    //const {client, adviser, date, hour, details} = appointment;
 
     const onSubmit = event => {
         event.preventDefault();
@@ -72,7 +72,7 @@ const FormComponent = (props) => {
 
     return (
         <Fragment>
-            <h2>Create New Appointment</h2>
+            <h2>New Appointment</h2>
             {/** if - error message with .css*/}
             {error ?
             <p className="alert-error">All filds are required</p>
