@@ -1,10 +1,24 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import FormComponent from './components/form/Form.component';
 import AppointmentComponent from './components/Appointment.component';
 
 function App() {
 
-  const [appointments, setAppointmentsState] = useState([]);
+  // local storage initial appointments
+  let initialAppointments = JSON.parse(localStorage.getItem('appointments'));
+  if (!initialAppointments){
+    initialAppointments = [];
+  }
+
+  const [appointments, setAppointmentsState] = useState(initialAppointments);
+
+  useEffect(() => {
+    if(!initialAppointments){
+      localStorage.setItem('appointments', JSON.stringify(appointments));
+    } else {
+      localStorage.setItem('appointments', JSON.stringify([]));
+    }
+  }, [appointments] );
 
   const newAppointment = appointment =>{
     setAppointmentsState([
@@ -17,6 +31,12 @@ function App() {
     const afterDeleteAppointments = appointments.filter(appointment => appointment.id !== id);
     setAppointmentsState(afterDeleteAppointments)
   }
+
+  const title = appointments.length === 0 ?  
+  'There are not Appointments'
+  :
+  'List of Appointments';
+  console.log();
 
   return (
     <Fragment>
@@ -31,7 +51,7 @@ function App() {
         </div>
       {/** Second Column */}
         <div className="one-half column">
-         <h2>List of Appointments</h2>
+          <h2>{title}</h2>
          {appointments.map(appointment =>(  
             <AppointmentComponent  
               key={appointment.id}
