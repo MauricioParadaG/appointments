@@ -2,6 +2,7 @@ import React, {Fragment, useState, useEffect} from 'react';
 import FormComponent from './components/form/Form.component';
 import AppointmentComponent from './components/Appointment.component';
 import PropTypes from 'prop-types';
+import { HeaderComponent } from './components/header/Header.component';
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
   const [appointments, setAppointmentsState] = useState(initialAppointments);
 
   // Fazt modification
-  const [advisor, setAdvisorState] = useState('advisor');
+  const [userName, setUserNameState] = useState("ZZ's ");
 
   useEffect( () => {
     if(initialAppointments){
@@ -57,15 +58,25 @@ function App() {
      ))
   );
 
+
+
+
+
+ 
+ // HTML  - VIEW
+
   const title = appointments.length === 0 ?  
   'There are not Appointments'
   :
   'List of Appointments';
-  console.log();
+
 
   return (
     <Fragment>
-    <h1>Appointment Administrator</h1>
+    <HeaderComponent 
+    userFaztState={userName}
+    appointmentsState={appointments}
+    />
     
     <div className="container">
       <div className="row">
