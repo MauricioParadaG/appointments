@@ -13,6 +13,9 @@ function App() {
 
   const [appointments, setAppointmentsState] = useState(initialAppointments);
 
+  // Fazt modification
+  const [advisor, setAdvisorState] = useState('advisor');
+
   useEffect( () => {
     if(initialAppointments){
       localStorage.setItem('appointments', JSON.stringify(appointments));
@@ -27,6 +30,17 @@ function App() {
       appointment
     ]);
   }
+    
+  // Appointments information - iteration  
+  const iteringAppointments = () =>(
+    appointments.map(appointment =>(
+      <AppointmentComponent
+        key={appointment.id}
+        appointmentsState={appointment}
+        deleteAppointment={deleteAppointment}
+      />
+    ))
+  );
 
   const deleteAppointment = id =>{
     const afterDeleteAppointments = appointments.filter(appointment => appointment.id !== id);
@@ -53,13 +67,7 @@ function App() {
       {/** Second Column */}
         <div className="one-half column">
           <h2>{title}</h2>
-         {appointments.map(appointment =>(  
-            <AppointmentComponent  
-              key={appointment.id}
-              appointmentsState={appointment}
-              deleteAppointment={deleteAppointment}
-            />
-          ))}
+          {iteringAppointments()}
         </div>
       </div>
     </div>

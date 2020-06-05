@@ -1,13 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-const AppointmentComponent = (props) => (
+const AppointmentComponent = props => (
+
+    // HTML view, appointments without return
     <div className="appointment">
         <p>Client: <span>{props.appointmentsState.client}</span> </p>
         <p>Advisor: <span>{props.appointmentsState.adviser}</span> </p>
         <p>Date: <span>{props.appointmentsState.date}</span> </p>
         <p>Hour: <span>{props.appointmentsState.hour}</span> </p>
         <p>Details: <span>{props.appointmentsState.details}</span> </p>
+        <p>Done: <input type="checkbox" checked={props.appointmentsState.done}/> </p>
 
     {/** Button */}
         <button

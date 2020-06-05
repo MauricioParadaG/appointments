@@ -11,7 +11,8 @@ const FormComponent = (props) => {
            adviser:'',
            date:'',
            hour:'',
-           details:''
+           details:'',
+           done: false
         }
       );
 
