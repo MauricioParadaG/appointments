@@ -10,7 +10,13 @@ const AppointmentComponent = props => (
         <p>Date: <span>{props.appointmentsState.date}</span> </p>
         <p>Hour: <span>{props.appointmentsState.hour}</span> </p>
         <p>Details: <span>{props.appointmentsState.details}</span> </p>
-        <p>Done: <input type="checkbox" checked={props.appointmentsState.done}/> </p>
+        <p>Done: 
+            <input 
+            type="checkbox" 
+            checked={props.appointmentsState.done}
+            onChange={() => props.toggleTask(props.appointmentsState.id)}
+            /> 
+        </p>
 
     {/** Button */}
         <button

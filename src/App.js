@@ -31,21 +31,31 @@ function App() {
     ]);
   }
     
-  // Appointments information - iteration  
-  const iteringAppointments = () =>(
-    appointments.map(appointment =>(
-      <AppointmentComponent
-        key={appointment.id}
-        appointmentsState={appointment}
-        deleteAppointment={deleteAppointment}
-      />
-    ))
-  );
-
   const deleteAppointment = id =>{
     const afterDeleteAppointments = appointments.filter(appointment => appointment.id !== id);
-    setAppointmentsState(afterDeleteAppointments)
+    setAppointmentsState(afterDeleteAppointments);
   }
+
+    // Changing the done state: false / true
+  const toggleTask = id =>{
+    const changingDoneStatus = appointments.map(appointment => appointment.id === id ? 
+      {...appointment, done: !appointment.done}
+      : appointment
+      );
+    setAppointmentsState(changingDoneStatus);
+  }
+
+    // Appointments information - iteration  
+  const iteringAppointments = () =>(
+     appointments.map(appointment =>(
+       <AppointmentComponent
+         key={appointment.id}
+         appointmentsState={appointment}
+         deleteAppointment={deleteAppointment}
+         toggleTask={toggleTask}
+       />
+     ))
+  );
 
   const title = appointments.length === 0 ?  
   'There are not Appointments'
