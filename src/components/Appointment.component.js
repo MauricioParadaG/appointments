@@ -10,7 +10,7 @@ const AppointmentComponent = props => (
         <p>Date: <span>{props.appointmentsState.date}</span> </p>
         <p>Hour: <span>{props.appointmentsState.hour}</span> </p>
         <p>Details: <span>{props.appointmentsState.details}</span> </p>
-        <p>Done: 
+        <p>Attended: 
             <input 
             type="checkbox" 
             checked={props.appointmentsState.done}

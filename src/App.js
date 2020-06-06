@@ -3,6 +3,7 @@ import FormComponent from './components/form/Form.component';
 import AppointmentComponent from './components/Appointment.component';
 import PropTypes from 'prop-types';
 import { HeaderComponent } from './components/header/Header.component';
+import VisibilityControlComponent from './components/VisibilityControl.component';
 
 function App() {
 
@@ -17,6 +18,11 @@ function App() {
   // Fazt modification
   const [userName, setUserNameState] = useState("ZZ's ");
 
+  // Checkbox Visibility control done complete
+  const [showAttended, setShowAttendedState] = useState(true);
+
+
+  // useEffect for local Storage
   useEffect( () => {
     if(initialAppointments){
       localStorage.setItem('appointments', JSON.stringify(appointments));
@@ -47,8 +53,10 @@ function App() {
   }
 
     // Appointments information - iteration  
-  const iteringAppointments = () =>(
-     appointments.map(appointment =>(
+  const iteringAppointments = doneValue =>(
+     appointments
+     .filter(appointment => appointment.done === doneValue)
+     .map(appointment =>(
        <AppointmentComponent
          key={appointment.id}
          appointmentsState={appointment}
@@ -57,9 +65,6 @@ function App() {
        />
      ))
   );
-
-
-
 
 
  
@@ -85,10 +90,26 @@ function App() {
             newAppointment={newAppointment}
           />
         </div>
-      {/** Second Column */}
+        {/** Second Column */}
         <div className="one-half column">
           <h2>{title}</h2>
-          {iteringAppointments()}
+          {iteringAppointments(false)}
+
+          <div>
+          {/** Checkbox - Attended Appointments */}
+           <VisibilityControlComponent
+             description="Attended Appointments"
+             showAttendedState={showAttended}
+             onChangeAttended={checked => setShowAttendedState(checked)}
+           />
+          </div>
+
+          {/** Completed Appointments view */}
+          {
+            showAttended && iteringAppointments(true)
+          }
+
+
         </div>
       </div>
     </div>
