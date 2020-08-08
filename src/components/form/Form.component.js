@@ -34,7 +34,8 @@ const FormComponent = (props) => {
     const onSubmit = event => {
         event.preventDefault();
         // validation
-        if (appointment.client.trim() ==='' ||          appointment.adviser.trim() ==='' ||
+        if (appointment.client.trim() ==='' || 
+        appointment.adviser.trim() ==='' ||
         appointment.date.trim() ==='' ||
         appointment.hour.trim() ==='' ||
         appointment.details.trim() ==='' ){
